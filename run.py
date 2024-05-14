@@ -7,7 +7,7 @@ agent = DoWhatISayAgent()
 env = gym.make(
     "browsergym/openended",
     headless=False,
-    wait_for_user_message=True,
+    wait_for_user_message=False,
     action_mapping=agent.get_action_mapping(),
     task_kwargs={"start_url": "https://www.google.com/"},
 )

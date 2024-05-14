@@ -56,3 +56,12 @@ def scroll(x: float, y: float):
         scroll(-50.2, -100.5)
     """
     page.mouse.wheel(x, y)
+
+def wait(seconds: float=1):
+    """
+    Does nothing. Useful for when you want to wait for something to happen.
+
+    Examples:
+        wait(2)
+    """
+    page.wait_for_timeout(seconds * 1000)

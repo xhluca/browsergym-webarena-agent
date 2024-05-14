@@ -4,7 +4,7 @@ import time
 from browsergym.utils.obs import flatten_axtree_to_str, flatten_dom_to_str
 from browsergym.core.action.highlevel import HighLevelActionSet
 
-from functions import say, click, textinput, load, scroll
+from functions import say, click, textinput, load, scroll, wait
 
 
 class Agent(ABC):
@@ -46,9 +46,17 @@ class Agent(ABC):
 
 class DoWhatISayAgent(Agent):
     def reset(self, seed=None) -> None:
-        self.last_n_user_msgs = None
+        self.messages = []
         pass
 
+    @property
+    def num_messages(self):
+        return len(self.messages)
+    
+    @property
+    def num_user_messages(self):
+        return len([message for message in self.messages if message["role"] == "user"])
+    
     def get_action(self, obs: dict) -> str:
         # preprocessing
         obs["dom_txt"] = flatten_dom_to_str(obs["dom_object"])
@@ -56,30 +64,22 @@ class DoWhatISayAgent(Agent):
 
         action = self.do_what_i_say(obs)
 
-        print(f'Last action error:\n{obs["last_action_error"]}')
+        if obs["last_action_error"]:
+            print(f'Last action error:\n{obs["last_action_error"]}')
 
         return action
 
     def do_what_i_say(self, obs: dict) -> str:
-        last_user_message = None
-        n_usr_msgs = 0
-        for message in obs["chat_messages"]:
-            if message["role"] == "user":
-                last_user_message = message["message"]
-                n_usr_msgs += 1
+        new_messages = obs["chat_messages"][self.num_messages:]
+        self.messages.extend(new_messages)
 
-        if (
-            self.last_n_user_msgs is None
-            or self.last_n_user_msgs != n_usr_msgs
-            and n_usr_msgs > 0
-        ):
+        # if the last new message is from the user, then the agent should act
+        if len(new_messages) > 0 and new_messages[-1]["role"] == "user":
+            last_user_message = new_messages[-1]["message"]
             print("last_user_message:", last_user_message)
             action = last_user_message
         else:
-            time.sleep(1)
-            action = "say('type a command')"
-
-        self.last_n_user_msgs = n_usr_msgs
+            action = "wait()"
 
         return action
 
@@ -89,7 +89,7 @@ class DoWhatISayAgent(Agent):
         """
         action_set = HighLevelActionSet(
             subsets="custom",
-            custom_actions=[say, click, textinput, load, scroll],
+            custom_actions=[say, click, textinput, load, scroll, wait],
             multiaction=False,
             strict=True,
         )
