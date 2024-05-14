@@ -2,7 +2,7 @@
 
 This agent will execute your action based on what you say in the chat, directly as commands.
 
-![Simple BrowserGym Agent Demo](./demo.mp4)
+[Simple BrowserGym Agent Demo](demo.mp4)
 
 ## Quickstart
 
