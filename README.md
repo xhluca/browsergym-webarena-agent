@@ -44,9 +44,3 @@ load(url="https://webllama.github.io")
 # scrolling
 scroll(x=0, y=300)
 ```
-
-## Quickstart
-
-```bash
-python run.py
-```
