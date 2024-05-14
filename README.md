@@ -4,7 +4,21 @@ This agent will execute your action based on what you say in the chat, directly 
 
 ![Simple BrowserGym Agent Demo](./demo.mp4)
 
-## Installation
+## Quickstart
+
+```bash
+# Clone the repository
+git clone https://github.com/xhluca/browsergym-simple-agent
+cd browsergjson-simple-agent
+
+# Create a virtual environment and install the dependencies
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# run the agent
+python run.py
+```
 
 ## Usage
 
