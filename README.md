@@ -2,7 +2,8 @@
 
 This agent will execute your action based on what you say in the chat, directly as commands.
 
-[Simple BrowserGym Agent Demo](demo.mp4)
+https://github.com/xhluca/browsergym-simple-agent/assets/21180505/7c12d147-698b-464b-8d74-886763125d2d
+
 
 ## Quickstart
 
