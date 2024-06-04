@@ -1,1 +1,2 @@
 browsergym==0.2.2
+browsergym-webarena

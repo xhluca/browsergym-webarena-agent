@@ -5,11 +5,11 @@ from agent import DoWhatISayAgent
 agent = DoWhatISayAgent()
 
 env = gym.make(
-    "browsergym/openended",
+    "browsergym/webarena.310",
     headless=False,
-    wait_for_user_message=False,
+    wait_for_user_message=True,
     action_mapping=agent.get_action_mapping(),
-    task_kwargs={"start_url": "https://www.google.com/"},
+    task_kwargs={},
 )
 
 agent.reset()
