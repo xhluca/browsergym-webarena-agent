@@ -1,5 +1,5 @@
 import gymnasium as gym
-import browsergym.core  # register the openended task as a gym environment
+import browsergym.webarena  # register webarena tasks as gym environments
 from agent import DoWhatISayAgent
 
 agent = DoWhatISayAgent()
@@ -7,9 +7,9 @@ agent = DoWhatISayAgent()
 env = gym.make(
     "browsergym/webarena.310",
     headless=False,
-    wait_for_user_message=True,
+    wait_for_user_message=False,
     action_mapping=agent.get_action_mapping(),
-    task_kwargs={},
+    # task_kwargs={},
 )
 
 agent.reset()

@@ -66,6 +66,7 @@ class DoWhatISayAgent(Agent):
 
         if obs["last_action_error"]:
             print(f'Last action error:\n{obs["last_action_error"]}')
+            # if the last action was an error, then the agent should wait
 
         return action
 
